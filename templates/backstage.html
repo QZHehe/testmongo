@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>后台管理界面</title>
+  <link href="/static/main.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="/static/backstage.js"></script>
+
+{#  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>#}
+  <script src="/static/jquery.js"></script>
+</head>
+<body>
+<div class="col s12" id="project_lists"></div>
+<script>
+    $(document).ready(function () {
+        /**获取工程列表*/
+        getProjects('/getimage');
+    });
+</script>
+
+</body>

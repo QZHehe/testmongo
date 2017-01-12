@@ -17,7 +17,7 @@ def get_mongodb_collection():
         raise Exception("Cannot instantiate ImageCollection without \
                          a MongoDB server running on port 27666")
     # return connection.image_collection.images
-    return connection.image.test2
+    return connection.image.test1
 
 
 # For parallel execution, function must be in module scope

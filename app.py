@@ -1,3 +1,4 @@
+# coding = utf-8
 import matplotlib
 matplotlib.use('Agg')
 
@@ -46,13 +47,23 @@ def index():
     # sum numbers
     # results = collection.find().count()
     return render_template(
-        'hello.html')
+        'backstage.html')
 
 
-@app.route('/post_mongo')
+@app.route('/main_mongo')
 def post_mongo():
-    return render_template(
-        'upload.html')
+    data = collection.find().limmit(3)
+
+    return make_json_response({data: data})
+
+
+@app.route('/getimage')
+def getimage():
+    results = []
+    datas = collection.find(fields={'hist': False, 'spa_hist': False}).limit(3)
+    for data in datas:
+        results.append(data)
+    return make_json_response({'results': results})
 
 
 @app.route('/post_mongo_image', methods=['POST'])
@@ -70,6 +81,9 @@ def post_mongo_image():
         bson_spa_hist = bson_hist
         img_data = dict(img.as_dict().items() + {'hist': bson_hist}.items() + {'spa_hist': bson_spa_hist}.items())
         collection.insert(img_data)
+
+
+
     return render_template(
         'upload.html')
 
