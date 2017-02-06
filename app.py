@@ -51,11 +51,12 @@ def index():
 
 
 @app.route('/main_mongo')
-def post_mongo():
-    data = collection.find().limmit(3)
-
-    return make_json_response({data: data})
-
+def main_mongo():
+    # data = collection.find().limmit(3)
+    #
+    # return make_json_response({data: data})
+    return render_template(
+        'upload.html')
 
 @app.route('/getimage')
 def getimage():
@@ -81,8 +82,6 @@ def post_mongo_image():
         bson_spa_hist = bson_hist
         img_data = dict(img.as_dict().items() + {'hist': bson_hist}.items() + {'spa_hist': bson_spa_hist}.items())
         collection.insert(img_data)
-
-
 
     return render_template(
         'upload.html')
