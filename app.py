@@ -61,7 +61,7 @@ def main_mongo():
 @app.route('/getimage')
 def getimage():
     results = []
-    datas = collection.find(fields={'hist': False, 'spa_hist': False}).limit(3)
+    datas = collection.find(fields={'hist': False, 'spa_hist': False}).limit(20)
     for data in datas:
         results.append(data)
     return make_json_response({'results': results})
@@ -85,6 +85,14 @@ def post_mongo_image():
 
     return render_template(
         'upload.html')
+
+
+@app.route('/delete_image', methods=['POST'])
+def delete_image():
+    id = request.values['id']
+    collection.remove({"id": id})
+    return make_json_response({'results': True})
+
 
 
 
